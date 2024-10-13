@@ -58,5 +58,12 @@ def favorite_movie_tracker():
     print("Final list of tracked movies:")
     for movie in favorite_movies:
         print(movie)
+
+    return favorite_movies
+
+def display_list(favorite_movies):
+    print("Your favorite movies are:")
+    for movie in favorite_movies:
+        print(movie)
                
                 

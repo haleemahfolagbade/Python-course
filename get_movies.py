@@ -2,6 +2,7 @@ import sys
 sys.path.append("/Users/haleemahfolagbade/Downloads/Python course/movie_tracker.py")
 
 from movie_tracker import favorite_movie_tracker
+from movie_tracker import display_list
 
 favorite_movies = []
 
@@ -19,10 +20,7 @@ while True:
 
     elif choice == "2":
         if favorite_movies:
-            print("Your favorite movies are:")
-            for movie in favorite_movies:
-                print(movie)
-    
+            display_list(favorite_movies)
         else:
             print("You haven't added any movies yet.")
 
