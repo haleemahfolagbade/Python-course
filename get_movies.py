@@ -1,5 +1,5 @@
 import sys
-sys.path.append("/Users/haleemahfolagbade/Downloads/Python course/Project 5: Favorite Movies Tracker.py")
+sys.path.append("/Users/haleemahfolagbade/Downloads/Python course/movie_tracker.py")
 
 from movie_tracker import favorite_movie_tracker
 
@@ -15,7 +15,7 @@ while True:
     choice = input("Enter your choice: ")
 
     if choice == "1":
-        favorite_movie_tracker()
+        favorite_movies = favorite_movie_tracker()
 
     elif choice == "2":
         if favorite_movies:

@@ -1,46 +1,62 @@
-def favorite_movie_tracker():
+def user_name():
+    # Get user's full name and return the first name
     user_name = input("Enter your full name: ").title()
-    split = user_name.split(" ")
-    print(f"Hello {split[0]}")
+    first_name = user_name.split(" ")[0]
+    return first_name
 
-
-    no_of_movies = int(input("How many movies do you want to track?\n "))
-    print("OK")
-
-    favorite_movies = []
-
-    #Total number of movies in the list must always be less than or equal to the number stipulated by users to be tracked.
-    #if total number in list is less than number of movies, inquire if they want to add more list
-
-    while len(favorite_movies) <= no_of_movies:
-        movie_list = input("List the movies: ").split(",")
+def get_movies_limit():
+    # Gets and return the number of movies the user wants to track
+    return int(input("How many movies do you want to track?\n "))
+    
+def add_movies(favorite_movies, no_of_movies):
+    # Adds movies to favorite movie list
+    while len(favorite_movies) < no_of_movies:
+        movie_list = input("List the movies (comma-seperated):\n ").split(",")
 
         for movie in movie_list: #to store each movie in the list
             if movie.strip().title() not in favorite_movies:
-                favorite_movies.append(movie.strip().title()) #capitalize the output
+                    favorite_movies.append(movie.strip().title()) #capitalize the output
             else: 
                 print("Movie already exists.")
-            
-        print("You have the following movies tracked: ")
+                
+            print("You have the following movies tracked: ")
         for movie in favorite_movies:
             print(movie)
 
-    #Once the user exhausts the number, throw a message and asks if they would like to increase limits. if yes, they add, and no the program stops 
-    #cinema showings for each movie
+    return favorite_movies
 
-        if len(favorite_movies) == no_of_movies:
-            increase_limit = input("You've exhausted your track limit. Do you want to increase it? Type yes/no?\n").lower()
-            if increase_limit == "yes":
-                new_limit = int(input("Enter new limit:\n "))
-                no_of_movies += new_limit
-                print("You have now increased your limit by " + str((new_limit + no_of_movies)-no_of_movies))
-            elif increase_limit == "no":
-                break
-            else:
-                print("Invalid input")
+def increase_limits(favorite_movies, no_of_movies):
+     # Prompts users to increase limit
+     if len(favorite_movies) == no_of_movies:
+        increase = input("You've exhausted your track limit. Do you want to increase it? Type yes/no?\n").lower()
+        if increase == "yes":
+            new_limit = int(input("Enter new limit:\n "))
+            no_of_movies += new_limit
+            print ("You have now increased your limit by " + str((new_limit + no_of_movies)-no_of_movies))
+        elif increase == "no":
+            return no_of_movies, False # Stop tracking
+        else:
+            print("Invalid input")
+        return no_of_movies, True # Continue tracking
+     
+def favorite_movie_tracker():
+    first_name = user_name()
+    print(f"Hello {first_name}")
+    no_of_movies = get_movies_limit()
+    favorite_movies = []
+
+    while True:
+        favorite_movies = add_movies(favorite_movies, no_of_movies)
+
+          # If limit reached, ask user to increase or exit
+
+        if len(favorite_movies) >= no_of_movies:
+            no_of_movies, continue_tracking = increase_limits(favorite_movies, no_of_movies)
+            if not continue_tracking:
+                break 
+               
+    print("Final list of tracked movies:")
+    for movie in favorite_movies:
+        print(movie)
+               
                 
-
-    #let's make each input unique
-
-
-
